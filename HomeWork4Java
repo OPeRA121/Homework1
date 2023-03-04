@@ -1,0 +1,149 @@
+org  package.future.code.домашнее задание;
+
+импорт java .безопасность.MessageDigest;
+импорт java .безопасность.Исключение NoSuchAlgorithmException;
+java import.util.Список массивов;
+java import.util.Массивы;
+java import.util.Коллекции;
+java import.util.Хэш-карта;
+java import.util.List;
+java import.util.Объекты;
+java import.util.function.Функция;
+
+Домашняя  работа4 класс  общедоступный {
+
+    
+
+    Список  статических  общедоступных <Строка> Исправленный список (Список <Строка> Список строк) {
+         ArrayList<String> correctedList = new ArrayList<>();
+ for (int i = 0; i < stringList.size(); i++) {
+ if (!stringList.get(i).matches(".*[A-Z]+.*")) {
+ correctedList.add(stringList.get(i));
+            }
+        }
+        return Collections.emptyList();
+    }
+    public static HashMap<String, Integer> magSort(HashMap<String, Integer> shopCart) {
+         Set<String> keysToRemove = new HashSet<>();
+ for (Map.Entry<String, Integer> ent : shopCart.entrySet()) {
+ Integer temp = ent.getValue();
+ for (int i = 0; i < shopCart.size() ; i++) {
+ if (temp>300) {
+ String tmp = ent.getKey();
+ keysToRemove.add(tmp);
+                }
+            }
+        }
+ shopCart.keySet().removeAll(keysToRemove);
+        return shopCart;
+    }
+
+    public static void main(String[] args) {
+        testFirstTask();
+        testSecondTask();
+    }
+
+    public static final List<String> STRING_LIST = Arrays.asList(
+            "Onee",
+            "tWo",
+            "list",
+            "windoWWW",
+            "user authorization was successful",
+            "this is A complex strUcture",
+            "and who are the judges",
+            "The ArrayList class supports dynamic arrays",
+            "the arraylist class inherits from the abstractList class"
+    );
+    public static final List<String> STRING_LIST_CORRECT = Arrays.asList(
+            "list",
+            "user authorization was successful",
+            "and who are the judges"
+    );
+
+    public static final HashMap<String,Integer> HASH_MAP = new HashMap<>();
+
+    public static HashMap<String, Integer> setMagazine(){
+        HASH_MAP.put( "яблоки",300);
+        HASH_MAP.put("груши",456);
+        HASH_MAP.put("лук",80);
+        HASH_MAP.put("свекла",650);
+        HASH_MAP.put("картошка",1020);
+        HASH_MAP.put("чеснок",10);
+        HASH_MAP.put("ягоды",230);
+        return(HASH_MAP);
+    }
+    public static HashMap<String,Integer> HASH_MAP_CHECK = new HashMap<>();
+
+    public static HashMap<String, Integer> setlungsCheck(){
+        HASH_MAP_CHECK.put( "яблоки",300);
+        HASH_MAP_CHECK.put("лук",80);
+        HASH_MAP_CHECK.put("чеснок",10);
+        HASH_MAP_CHECK.put("ягоды",230);
+        return(HASH_MAP_CHECK);
+    }
+
+    public static void testFirstTask() {
+        System.out.println("\nTests for correctedList()");
+        AntiCheat.run();
+        printTestCase(1, STRING_LIST_CORRECT.toString(), correctedList(STRING_LIST).toString(), 60);
+    }
+
+    public static void testSecondTask() {
+        System.out.println("\nTests for magSort()");
+        AntiCheat.run();
+        printTestCase(1, setlungsCheck().toString(), magSort(setMagazine()).toString(), 40);
+    }
+
+    public static class AntiCheat {
+        public static void run() {
+            StringBuilder sb = new StringBuilder("");
+            List<String> antiCheatList = new ArrayList<>();
+            antiCheatList.addAll(STRING_LIST);
+            antiCheatList.addAll(STRING_LIST_CORRECT);
+            antiCheatList.addAll(HomeWork4.setMagazine().keySet().stream().map(Object::toString).toList());
+            antiCheatList.addAll(HomeWork4.setlungsCheck().values().stream().map(Object::toString).toList());
+            antiCheatList.add(sb.toString());
+            calcHash(antiCheatList);
+        };
+
+        public static String bytesToHex(byte[] bytes) {
+            char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
+            char[] hexChars = new char[bytes.length * 2];
+            for (int j = 0; j < bytes.length; j++) {
+                int v = bytes[j] & 0xFF;
+                hexChars[j * 2] = HEX_ARRAY[v >>> 4];
+                hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
+            }
+            Строка  нового  возврата (шестнадцатеричные символы);
+        }
+
+        calcHash  аннулирует  статический  общедоступный (список <Строка> список) {
+            общая  строка = String.join("", список);
+            попробуйте {
+                md MessageDigest = MessageDigest.getInstance("MD5");
+                md.update(total.getBytes());
+                байт[] дайджест = md.digest();
+                System.out.println("Античит-чек: " + байт-тестогекс (дайджест));
+ } catch (исключение NoSuchAlgorithmException  игнорируется) {}
+        }
+    }
+
+    constLen  String  статический  публичный(String  str, int  len) {
+        sb  StringBuilder = новый  StringBuilder(str);
+        пока (len-- - str.length() > 0) sb.добавить(" ");
+        sb  возвращает.toString();
+    }
+
+    printTestCase  аннулирует  статический  публичный (int  n, String  exp, String  act, int  minLen) {
+        Функция<Строка, строка> зеленый = str -> "\u001B[34m" + str + "\u001B[0m";
+        Функция<Строка, строка> желтый = str -> "\u001B[33m" + str + "\u001B[0m";
+        System.out.println( "ТЕСТОВЫЙ ПРИМЕР" + constLen(String.valueOf(n), 4));
+        System.out.println( "Ожидание: " + yellow.apply(constLen(exp, minLen)) + "\nРеальность: " + green.apply(constLen(act, minLen)));
+        если (Объекты.равно(exp, act)) {
+            System.out.print("РЕЗУЛЬТАТ ТЕСТА: Положительный");
+ } остальное {
+            System.out.print("РЕЗУЛЬТАТ ТЕСТА: Отрицательный");
+        }
+        System.out.println();
+    }
+}
