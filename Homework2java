@@ -1,0 +1,110 @@
+org  package.future.code.домашнее задание;
+
+импорт java .безопасность.MessageDigest;
+импорт java .безопасность.Исключение NoSuchAlgorithmException;
+java import.util.Список массивов;
+java import.util.Массивы;
+java import.util.List;
+java import.util.Объекты;
+java import.util.function.Функция;
+
+Класс   HomeWork2 общедоступный {
+
+
+    validateLogin  аннулирует  статический  общедоступный (строковый  логин) {
+        //Место для Вашего кода из пункта 2
+    }
+
+    Логический  логический  логический статический  публичный (строковый  логин) {
+        //Место для Вашего кода из пункта 3
+        ложный  возврат;
+    }
+
+    main  аннулирует  статические  общедоступные (String[] аргументы) {
+        System.out.println("\nTests для validateLogin");
+        Защита от чита.run();
+        для (int  i = 0; i < loginList.size(); i++) {
+            попробуйте {
+                validateLogin(loginList.get(i));
+                printTestCase(i, checkLoginResults.get(i), true, 20);
+ } перехват(исключение  e) {
+                printTestCase(i, checkLoginResults.get(i), false, 20);
+            }
+        }
+
+        System.out.println("\nTests для isLoginValid");
+        Защита от чита.run();
+        для (int  i = 0; i < loginList.size(); i++)
+            printTestCase(i + loginList.size(),
+                    Контрольный список результатов.получить(i),
+                    isLoginValid(loginList.get(i)),
+                    20);
+    }
+
+    Список  статических  общедоступных<логических> контрольных списков = Arrays.asList(
+            правда, правда, правда, ложь, ложь, ложь, ложь, ложь, ложь, ложь, ложь, ложь, правда
+    );
+
+    Список  статических  общедоступных<String> loginList = Arrays.asList(
+            "OPeRA_120", // true
+            "Opera", // true
+            "OPERA_121", // true
+            "Jdds", // false
+            "2121212", // false
+            "Robert", // false
+            "Sanji", // true
+            "dsd_", // false
+            "Strong", // false
+            "аdadad", // false
+            "ONAHF", // false
+            "Correct_22"                                        // true
+    );
+
+    Статический  общедоступный класс   защиты от мошенничества {
+        запустите  void  static  public() {
+            sb  StringBuilder = новый  StringBuilder("");
+            Список<Строка> Античит-лист = новый  список массивов<>();
+            Добавить список античитов (список входа);
+            antiCheatList.addAll(checkLoginResults.stream().map(Объект::toString).ToList());
+            antiCheatList.add(sb.toString());
+            calcHash(античит-лист);
+        };
+
+        Строка   BytesToHex статическая  общедоступная (байт [] байт) {
+            char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
+            char[] шестнадцатеричные символы = новый  символ[байт.длина * 2];
+            для (int  j = 0; j < байт.длина; j++) {
+                v  int = байты [j] и 0xFF;
+                Шестнадцатеричные символы[j * 2] = ШЕСТНАДЦАТЕРИЧНЫЙ МАССИВ[v >>> 4];
+                Шестнадцатеричные символы[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
+            }
+            Строка  нового  возврата (шестнадцатеричные символы);
+        }
+
+        calcHash  аннулирует  статический  общедоступный (список <Строка> список) {
+            общая  строка = String.join("", список);
+            попробуйте {
+                md MessageDigest = MessageDigest.getInstance("MD5");
+                md.update(total.getBytes());
+                байт[] дайджест = md.digest();
+                System.out.println("Античит-чек: " + байт-тестогекс (дайджест));
+ } catch (исключение NoSuchAlgorithmException  игнорируется) {}
+        }
+    }
+
+    constLen  String  статический  публичный(String  str, int  len) {
+        sb  StringBuilder = новый  StringBuilder(str);
+        пока (len-- - str.length() > 0) sb.добавить(" ");
+        sb  возвращает.toString();
+    }
+
+    printTestCase  аннулирует  статический  public(int  n, логический  exp, логический  act, int  minLen) {
+        Функция<Строка, строка> зеленый = str -> "\u001B[34m" + str + "\u001B[0m";
+        Функция<Строка, строка> желтый = str -> "\u001B[33m" + str + "\u001B[0m";
+        System.out.print( "ТЕСТОВЫЙ ПРИМЕР" + constLen(String.valueOf(n), 4));
+        System.out.print( "Ожидание: " + yellow.apply(constLen(exp.toString(), minLen)) + " Реальность: " + green.apply(constLen(act.toString(), minLen) + " "));
+        если (Объекты.равно(exp, act)) System.out.print("True"); иначе  System.out.print("False");
+        System.out.println();
+    }
+
+}
