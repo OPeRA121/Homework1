@@ -1,0 +1,76 @@
+public class MyFirtstClass {
+    public static void main(String[] args) {
+        University university = new University();
+        University.Party();
+    }
+}
+public class Student {
+    int age;
+   private String name;
+   void setName(String newName) {
+       name = newName;
+   }
+   String getName() {
+       return name;
+   }
+    Student() {
+        age = 19;
+        name = "default";
+        System.out.println("Human default constructor");
+    }
+    Student(int newAge, String newName) {
+        age = newAge;
+        name = newName;
+    System.out.println("Human age&name constructor");
+    }
+    Student(String newName, int newAge) {
+        age = newAge;
+        name = newName;
+        System.out.println("Human name&age constructor");
+    }
+    Student(Student s) {
+        age = s.age;
+        name = s.name;
+        System.out.println("Student copy constructor");
+    }
+
+
+    int birthday() {
+        age++;
+        System.out.println("Happy " + age + " Birthday, " + name+ "!");
+        return age;
+    }
+}
+public class Teacher {
+    Student[] students = new Student[3];
+
+    Teacher () {
+        for (int i = 0; i < 3; i++) {
+            students[i] = new Student();
+        }
+    }
+    public void University() {
+        for (int i = 0; i < 3; i++) {
+            students[i].birthday();
+        }
+    }
+}
+public class University {
+    Student[] students = new Student[9];
+
+    University() {
+        for (int i = 0; i < 9; i++) {
+            students[i] = new Student();
+        }
+    }
+    University () {
+        for (int i = 0; i < 3; i++) {
+            Teacher[i] = new Teacher();
+        }
+    }
+    public static void Party() {
+        for (int i = 0; i < 9; i++) {
+            students[i].birthday();
+        }
+    }
+}
