@@ -41,8 +41,6 @@ public class HomeWork4 {
         testSecondTask();
     }
 
-    /* Техническая секция - сюда писать ничего не надо */
-
     public static final List<String> STRING_LIST = Arrays.asList(
             "Onee",
             "tWo",
