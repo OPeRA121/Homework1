@@ -1,40 +1,38 @@
-org  package.future.code.домашнее задание;
+package org.future.code.homework;
 
-импорт java .безопасность.MessageDigest;
-импорт java .безопасность.Исключение NoSuchAlgorithmException;
-java import.util.Список массивов;
-java import.util.Массивы;
-java import.util.Коллекции;
-java import.util.Хэш-карта;
-java import.util.List;
-java import.util.Объекты;
-java import.util.function.Функция;
+import .security.MessageDigest;
+import .security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
 
-Домашняя  работа4 класс  общедоступный {
-
-    
-
-    Список  статических  общедоступных <Строка> Исправленный список (Список <Строка> Список строк) {
+public class HomeWork4 {
+   
+    public static List<String> correctedList(List<String> stringList) {
          ArrayList<String> correctedList = new ArrayList<>();
- for (int i = 0; i < stringList.size(); i++) {
- if (!stringList.get(i).matches(".*[A-Z]+.*")) {
- correctedList.add(stringList.get(i));
+        for (int i = 0; i < stringList.size(); i++) {
+            if (!stringList.get(i).matches(".*[A-Z]+.*")) {
+                correctedList.add(stringList.get(i));
             }
         }
         return Collections.emptyList();
     }
     public static HashMap<String, Integer> magSort(HashMap<String, Integer> shopCart) {
-         Set<String> keysToRemove = new HashSet<>();
- for (Map.Entry<String, Integer> ent : shopCart.entrySet()) {
- Integer temp = ent.getValue();
- for (int i = 0; i < shopCart.size() ; i++) {
- if (temp>300) {
- String tmp = ent.getKey();
- keysToRemove.add(tmp);
+        Set<String> keysToRemove = new HashSet<>();
+        for (Map.Entry<String, Integer> ent : shopCart.entrySet()) {
+            Integer temp = ent.getValue();
+            for (int i = 0; i < shopCart.size() ; i++) {
+                if (temp>300) {
+                    String tmp = ent.getKey();
+                    keysToRemove.add(tmp);
                 }
             }
         }
- shopCart.keySet().removeAll(keysToRemove);
+        shopCart.keySet().removeAll(keysToRemove);
         return shopCart;
     }
 
@@ -42,6 +40,8 @@ java import.util.function.Функция;
         testFirstTask();
         testSecondTask();
     }
+
+    /* Техническая секция - сюда писать ничего не надо */
 
     public static final List<String> STRING_LIST = Arrays.asList(
             "Onee",
@@ -114,35 +114,35 @@ java import.util.function.Функция;
                 hexChars[j * 2] = HEX_ARRAY[v >>> 4];
                 hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
             }
-            Строка  нового  возврата (шестнадцатеричные символы);
+            return new String(hexChars);
         }
 
-        calcHash  аннулирует  статический  общедоступный (список <Строка> список) {
-            общая  строка = String.join("", список);
-            попробуйте {
-                md MessageDigest = MessageDigest.getInstance("MD5");
+        public static void calcHash(List<String> list) {
+            String total = String.join("", list);
+            try {
+                MessageDigest md = MessageDigest.getInstance("MD5");
                 md.update(total.getBytes());
-                байт[] дайджест = md.digest();
-                System.out.println("Античит-чек: " + байт-тестогекс (дайджест));
- } catch (исключение NoSuchAlgorithmException  игнорируется) {}
+                byte[] digest = md.digest();
+                System.out.println("AntiCheatCheck: " + bytesToHex(digest));
+            } catch (NoSuchAlgorithmException ignored) {}
         }
     }
 
-    constLen  String  статический  публичный(String  str, int  len) {
-        sb  StringBuilder = новый  StringBuilder(str);
-        пока (len-- - str.length() > 0) sb.добавить(" ");
-        sb  возвращает.toString();
+    public static String constLen(String str, int len) {
+        StringBuilder sb = new StringBuilder(str);
+        while (len-- - str.length() > 0) sb.append(" ");
+        return sb.toString();
     }
 
-    printTestCase  аннулирует  статический  публичный (int  n, String  exp, String  act, int  minLen) {
-        Функция<Строка, строка> зеленый = str -> "\u001B[34m" + str + "\u001B[0m";
-        Функция<Строка, строка> желтый = str -> "\u001B[33m" + str + "\u001B[0m";
-        System.out.println( "ТЕСТОВЫЙ ПРИМЕР" + constLen(String.valueOf(n), 4));
+    public static void printTestCase(int n, String exp, String act, int minLen) {
+        Function<String, String> green = str -> "\u001B[34m" + str + "\u001B[0m";
+        Function<String, String> yellow = str -> "\u001B[33m" + str + "\u001B[0m";
+        System.out.println( "TEST CASE " + constLen(String.valueOf(n), 4));
         System.out.println( "Ожидание: " + yellow.apply(constLen(exp, minLen)) + "\nРеальность: " + green.apply(constLen(act, minLen)));
-        если (Объекты.равно(exp, act)) {
-            System.out.print("РЕЗУЛЬТАТ ТЕСТА: Положительный");
- } остальное {
-            System.out.print("РЕЗУЛЬТАТ ТЕСТА: Отрицательный");
+        if (Objects.equals(exp, act)) {
+            System.out.print("TEST RESULT: ✅");
+        } else {
+            System.out.print("TEST RESULT: ❌");
         }
         System.out.println();
     }
